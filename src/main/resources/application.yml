@@ -1,0 +1,44 @@
+external:
+  publicapi:
+    apiKey: "XM38b9NRI3rme90bFEAXkx5tMhliHgoaAChXa7hA3BtVsmRzGKmrNkp7A9tILINENoYFQq9qEQqRi2Ln%2BtmPSQ%3D%3D"
+  kepco:
+    kepcokey: 0m82zd7ldQA89hapC6WOZocz08R1ut5fg7UJ68rb
+    defaultCodeTy: cityCd
+    basedataurl: https://bigdata.kepco.co.kr/openapi/v1/commonCode.do
+    usagedataurl: https://bigdata.kepco.co.kr/openapi/v1/powerUsage/houseAve.do
+  kca:
+    basedataurl: http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getStandardInfoSvc.do
+    totaldiv : http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getStandardInfoSvc.do
+    storeinfo : http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getStoreInfoSvc.do?
+    productinfo : http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getProductInfoSvc.do?
+    priceinfo : http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getProductPriceInfoSvc.do?
+  weather:
+    shorttime: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst
+
+  
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+        show_sql: false
+        format_sql: false
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+
+  redis:
+    host: localhost   
+    port: 6379        
+
+  cache:
+    type: redis
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+
