@@ -1,7 +1,5 @@
 package com.projectsugarglider.kca.dto;
 
-import java.time.LocalDateTime;
-
 import com.projectsugarglider.kca.entity.KcaPriceInfoEntity;
 
 public record KcaPriceInfoDto(
@@ -30,17 +28,4 @@ public record KcaPriceInfoDto(
             .build();
     }
 
-    public static KcaPriceInfoDto fromEntity(KcaPriceInfoEntity e) {
-        return new KcaPriceInfoDto(
-            e.getGoodInspectDay(),
-            e.getEntpId(),
-            e.getGoodId(),
-            e.getGoodPrice(),
-            e.getPlusoneYn(),
-            e.getGoodDcYn(),
-            e.getGoodDcStartDay(),
-            e.getGoodDcEndDay(),
-            e.getInputDttm()
-        );
-    }
 }

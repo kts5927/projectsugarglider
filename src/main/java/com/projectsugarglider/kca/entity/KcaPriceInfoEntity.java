@@ -1,7 +1,5 @@
 package com.projectsugarglider.kca.entity;
 
-import java.time.LocalDateTime;
-
 import com.projectsugarglider.kca.entity.id.KcaPriceInfoId;
 
 import jakarta.persistence.Column;

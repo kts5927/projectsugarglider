@@ -1,15 +1,11 @@
 package com.projectsugarglider.kca.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.projectsugarglider.kca.api.PriceInfo;
-import com.projectsugarglider.kca.dto.KcaPriceInfoDto;
 import com.projectsugarglider.kca.service.KcaDummy;
 import com.projectsugarglider.kca.service.KcaNullData;
 import com.projectsugarglider.kca.service.KcaPriceService;
@@ -30,7 +26,6 @@ public class KcaController {
     private final KcaDummy dummy;
     private final KcaNullData nullData;
     private final KcaProductInfoService priceInfo;
-    private final PriceInfo priceInfoApi;
     private final KcaPriceService priceservice;
 
     @PostMapping("/1")
@@ -52,7 +47,7 @@ public class KcaController {
 
     @PostMapping("/3")
     public ResponseEntity<String> DataUpdateThree() throws JsonProcessingException{
-        priceservice.SavePriceInfoData();;
+        priceservice.SavePriceInfoData();
         return ResponseEntity.ok("kca 데이터 업데이트 성공");
     }
 
