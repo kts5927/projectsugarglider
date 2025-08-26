@@ -58,7 +58,7 @@ public class ShortTimeForecastService {
         String todayParam = now.format(YYYYMMDD);
         List<ShortTimeForecastDto> dtos = api.forecastCall(loc.nx(), loc.ny(), todayParam);
 
-        // 5. DTO 중에서 “(lastSaved, target]” 구간만 골라서 Entity로 변환
+        // 5. DTO 중에서 “(lastSaved, target)” 구간만 골라서 Entity로 변환
         List<ShortTimeForecastEntity> toSave = dtos.stream()
             .filter(dto -> {
                 String key = dto.fcstDate() + dto.fcstTime();

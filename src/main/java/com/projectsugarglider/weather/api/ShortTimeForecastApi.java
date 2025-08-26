@@ -23,10 +23,6 @@ public class ShortTimeForecastApi{
 
     private final GenericExternalApiService apiService;
  
-    // TODO: base_date/base_time 자료형 확인
-    // 날짜 자동설정 기능   
-    // DB에서 nx/ny 불러오기
-    // 11/305는 서울특별시 강북구
     public List<ShortTimeForecastDto> forecastCall(
         String nx,
         String ny,
