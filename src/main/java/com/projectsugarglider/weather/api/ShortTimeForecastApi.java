@@ -36,7 +36,7 @@ public class ShortTimeForecastApi{
             "pageNo", "1",
             "dataType","JSON",
             "base_date",now,
-            "base_time","0500",
+            "base_time","0200",
             "nx",nx,
             "ny",ny
             ),

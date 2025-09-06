@@ -21,10 +21,24 @@ public class KcaPriceService {
 
 
     @Transactional
-    public void SavePriceInfoData(){
+    public void SavePriceInfoData(String entp){
 
-        List<KcaPriceInfoDto> raw = priceInfo.priceEntpCall("100");
-        List<KcaPriceInfoEntity> entities = getEntities(raw);
+        List<KcaPriceInfoDto> raw = priceInfo.priceEntpCall(entp);
+        List<KcaPriceInfoEntity> entities = getEntities(raw).stream()
+            .map(e -> !"Y".equalsIgnoreCase(e.getGoodDcYn())
+                ? KcaPriceInfoEntity.builder()
+                    .goodInspectDay(e.getGoodInspectDay())
+                    .entpId(e.getEntpId())
+                    .goodId(e.getGoodId())
+                    .goodPrice(e.getGoodPrice())
+                    .plusoneYn(e.getPlusoneYn())
+                    .goodDcYn(e.getGoodDcYn())
+                    .goodDcStartDay(null)
+                    .goodDcEndDay(null)
+                    .inputDttm(e.getInputDttm())
+                    .build()
+                : e)
+            .toList();
         priceRepo.saveAll(entities);
         
     }

@@ -14,7 +14,9 @@ external:
     priceinfo : http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getProductPriceInfoSvc.do?
   weather:
     shorttime: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst
-
+  kakao:
+    searchkeyword: https://dapi.kakao.com/v2/local/search/keyword
+    restKey:  KakaoAK badc576c93e52619a2f44f382b852f0a
   
 
 spring:

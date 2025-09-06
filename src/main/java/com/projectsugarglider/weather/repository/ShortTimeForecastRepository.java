@@ -44,4 +44,14 @@ public interface ShortTimeForecastRepository
         @Param("lowerCode") String lowerCode,
         @Param("upperCode") String upperCode
     );
+
+    Optional<ShortTimeForecastEntity>
+    findFirstByUpperCodeAndLowerCodeAndCodeOrderByYearDescMonthDescDayDescTimeDesc(
+            String upper, String lower, String code
+    );
+
+    List<ShortTimeForecastEntity>
+    findByUpperCodeAndLowerCodeAndCodeAndYearAndMonthAndDayOrderByTimeAsc(
+            String upper, String lower, String code, String year, String month, String day
+    );
 }

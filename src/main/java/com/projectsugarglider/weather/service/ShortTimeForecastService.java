@@ -50,9 +50,9 @@ public class ShortTimeForecastService {
             repo.findAllTimeKeysByLocation(loc.lowerCode(), loc.upperCode()));
 
 
-        // 3. 지금까지 저장된 마지막 시각 (없으면 오늘 05:00)
+        // 3. 지금까지 저장된 마지막 시각 (없으면 오늘 02:00)
         OffsetDateTime lastSaved = findLastSaved(loc)
-            .orElseGet(() -> now.withHour(5).withMinute(0).withSecond(0).withNano(0));
+            .orElseGet(() -> now.withHour(2).withMinute(0).withSecond(0).withNano(0));
 
         // 4. API 호출 → DTO 리스트
         String todayParam = now.format(YYYYMMDD);

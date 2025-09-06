@@ -74,7 +74,7 @@ public class PriceInfo {
             params.put("goodId", goodId);
         }
 
-        params.put("goodInspectDay",dateTime.previousWeekFridayYyyyMmDd());
+        params.put("goodInspectDay",dateTime.previousTwoWeekFridayYyyyMmDd());
 
         return params;
     }

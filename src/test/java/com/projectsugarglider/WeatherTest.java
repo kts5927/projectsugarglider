@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.projectsugarglider.datainitialize.repository.LowerLocationCodeRepository;
-import com.projectsugarglider.util.dto.LocationDto;
 import com.projectsugarglider.weather.service.ShortTimeForecastService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,16 +29,16 @@ public class WeatherTest {
         log.info("return : {}",lower.findAllLocationWithWeather());
     }
 
-    @Test
-    void saveTest(){
-        LocationDto mok = new LocationDto(
-            "관악구", 
-            "서울특별시", 
-            "59", 
-            "125");
-        service.saveAllShortTimeForecast(mok);
-        log.info("작업완료");
-    }
+    // @Test
+    // void saveTest(){
+    //     LocationDto mok = new LocationDto(
+    //         "관악구", 
+    //         "서울특별시", 
+    //         "59", 
+    //         "125");
+    //     service.saveAllShortTimeForecast(mok);
+    //     log.info("작업완료");
+    // }
 
 
 }

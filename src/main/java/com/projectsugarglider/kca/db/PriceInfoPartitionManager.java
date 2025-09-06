@@ -4,9 +4,7 @@ package com.projectsugarglider.kca.db;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -40,7 +38,7 @@ public class PriceInfoPartitionManager {
 
     private void createPartitions(){
 
-        String ymd = dateTime.previousWeekFridayYyyyMmDd();
+        String ymd = dateTime.previousTwoWeekFridayYyyyMmDd();
 
         String sql = """
             CREATE TABLE IF NOT EXISTS kca_price_info_%s
@@ -56,7 +54,6 @@ private void dropPastPartitions() {
     // 최근 4주만 남기기 (KST 기준)
     LocalDate cutoff = LocalDate.now(ZoneId.of("Asia/Seoul")).minusWeeks(4);
 
-    // 부모 파티션 테이블 이름은 'kca_price_info' (언더스코어 없음)
     String sql = """
         SELECT c.relname
         FROM pg_class c
@@ -66,24 +63,16 @@ private void dropPastPartitions() {
     """;
 
     List<String> partitions = jdbcTemplate.queryForList(sql, String.class);
-
     for (String relname : partitions) {
-        Matcher m = PARTITION_NAME.matcher(relname);
-        if (!m.matches()) continue; 
-
-        String yyyymmdd = m.group(1);
-        LocalDate partDate;
-        try {
-            partDate = LocalDate.parse(yyyymmdd, BASIC);
-        } catch (DateTimeParseException e) {
-            continue; 
-        }
-
+        String prefix = "kca_price_info_";
+        String yyyymmdd = relname.substring(prefix.length());
+        LocalDate partDate = LocalDate.parse(yyyymmdd, BASIC);
         if (partDate.isBefore(cutoff)) {
             String drop = "DROP TABLE IF EXISTS " + relname;
             log.info("▼ 오래된 파티션 드랍: {} (날짜:{})", relname, partDate);
             jdbcTemplate.execute(drop);
         }
+
     }
 }
 }

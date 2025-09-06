@@ -11,7 +11,7 @@ import com.projectsugarglider.kca.service.KcaNullData;
 import com.projectsugarglider.kca.service.KcaPriceService;
 import com.projectsugarglider.kca.service.KcaProductInfoService;
 import com.projectsugarglider.kca.service.KcaStandardDataSaveService;
-import com.projectsugarglider.kca.service.KcaStoreInfoService;
+import com.projectsugarglider.kca.service.KcaStoreInfoSaveService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class KcaController {
 
     private final KcaStandardDataSaveService KcaService;
-    private final KcaStoreInfoService InfoService;
+    private final KcaStoreInfoSaveService InfoService;
     private final KcaDummy dummy;
     private final KcaNullData nullData;
     private final KcaProductInfoService priceInfo;
@@ -42,12 +42,6 @@ public class KcaController {
     @PostMapping("/2")
     public ResponseEntity<String> DataUpdateTwo() throws JsonProcessingException{
         priceInfo.SaveProductInfoData();
-        return ResponseEntity.ok("kca 데이터 업데이트 성공");
-    }
-
-    @PostMapping("/3")
-    public ResponseEntity<String> DataUpdateThree() throws JsonProcessingException{
-        priceservice.SavePriceInfoData();
         return ResponseEntity.ok("kca 데이터 업데이트 성공");
     }
 

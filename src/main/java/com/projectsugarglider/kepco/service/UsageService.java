@@ -39,6 +39,7 @@ public class UsageService {
 
         List<String> metroCdRaw    = fetchAllKepcoCodes();
         List<KepcoUsageEntity> es  = buildUsageEntities(year, month, metroCdRaw);
+        log.info(es.get(0).getUpperCode());
 
         usageRepository.saveAll(es);
     }

@@ -59,6 +59,11 @@ public class DateTime {
         return new String[]{y, m, d, t};
     }
 
+    public String kstNowYYYYMMDD() {
+        LocalDate todayKst = kstNow().toLocalDate();
+        return todayKst.format(YYYYMMDD);
+    }
+
     /*
      * String 날짜값을 OffsetDateTime으로 바꿔주는 함수
      * KST기준YYYYMMDDHHMM으로 바뀜
@@ -91,13 +96,21 @@ public class DateTime {
     }
     
     /**
-     * 이전주 금요일(월요일 시작 주 기준)을 KST 기준 YYYYMMDD 문자열로 반환
+     * 1주전 금요일(월요일 시작 주 기준)을 KST 기준 YYYYMMDD 문자열로 반환
      */
     public String previousWeekFridayYyyyMmDd() {
         LocalDate todayKst = kstNow().toLocalDate();
         LocalDate currentWeekMonday = todayKst.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate previousWeekFriday = currentWeekMonday.minusDays(3); // 월요일 - 3일 = 이전주 금요일
+        LocalDate previousWeekFriday = currentWeekMonday.minusDays(3); // 월요일 - 3일 = 2주전 금요일
         return previousWeekFriday.format(YYYYMMDD);
+    }
+
+    public String previousTwoWeekFridayYyyyMmDd() {
+        LocalDate todayKst = kstNow().toLocalDate();
+        LocalDate currentWeekMonday = todayKst.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate previousWeekFriday = currentWeekMonday.minusDays(3); // 월요일 - 3일 = 2주전 금요일
+        LocalDate twoWeekAgoFriday = previousWeekFriday.minusWeeks(1);
+        return twoWeekAgoFriday.format(YYYYMMDD);
     }
     public String previousMonthFridayYyyyMmDd() {
         LocalDate todayKst = kstNow().toLocalDate();
