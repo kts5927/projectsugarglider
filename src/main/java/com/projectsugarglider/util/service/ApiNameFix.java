@@ -62,7 +62,7 @@ public class ApiNameFix {
      * @param originalLower 원본 구/군명
      * @return 공백이 모두 제거된 이름
      */
-    public static String fixLower(String originalLower) {
+    public String fixLower(String originalLower) {
         if (originalLower == null) {
             return null;
         }

@@ -24,6 +24,11 @@ public class KepcoService {
     private final LowerLocationCodeRepository lowerRepo;
     private final ApiNameFix nameFix;
 
+    /**
+     * 한전 지역 데이터를 업데이트 합니다.
+     * 기상청 지역 코드와 같은지역이지만 다르게 표기된 이름이 있기 때문에
+     * nameFix로 데이터를 보정해 줍니다.(예시/ 강원도 -> 강원특별자치도)
+     */
     @Transactional
     public void updateBaseKepcoData() {
         // 1) cityCd API 호출

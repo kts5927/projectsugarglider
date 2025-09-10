@@ -24,7 +24,14 @@ public class KcaAPI {
     private final GenericExternalApiService apiService;
 
     /**
-     * 소비자원(KCA) 기본 데이터를 요청합니다.
+     * 소비자원 지역 데이터를 호출합니다.
+     * DataInitialize에서는 지역데이터를, 
+     * kca.api에서는 상품종류, 판매처 등의 데이터를 호출합니다.
+     * 
+     * 호출파라미터
+     * classCode : AR
+     * 
+     * @return     소비자원 지역 데이터
      */
     public List<KcaCommonDto> baseDataCall() {
         return apiService.getCall(

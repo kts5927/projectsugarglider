@@ -12,7 +12,10 @@ public class BaseDataService{
     private final KcaService kcaLocationSaveService;
     private final KepcoService kepcoLocationSaveService;
 
-
+    /**
+     * 지역데이터를 통합저장하는 코드
+     * 기상청, 소비자원, 한전 데이터를 한번에 업데이트합니다.
+     */
     public void saveAllLocations()  {
         weatherLocationSaveService.updateBaseWeatherData();
         kcaLocationSaveService.updateBaseKcaData();

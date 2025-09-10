@@ -14,6 +14,16 @@ import com.projectsugarglider.datainitialize.dto.WeatherCommonDto;
 @Service
 public class WeatherCsvReader {
 
+    /**
+     * 기상청 지역 데이터를 호출합니다.
+     * DataInitialize에서는 지역데이터를, 
+     * weather.api에서는 일기예보 데이터를 호출합니다.
+     * 
+     * 데이터는 API호출이 아닌
+     * main/resources/기상청데이터.csv의 데이터를 참고합니다.
+     * 
+     * @return     한전 지역 데이터
+     */
     public List<WeatherCommonDto> baseDataCall() {
         try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(
                 new InputStreamReader(new ClassPathResource("기상청데이터.csv").getInputStream(), "UTF-8")

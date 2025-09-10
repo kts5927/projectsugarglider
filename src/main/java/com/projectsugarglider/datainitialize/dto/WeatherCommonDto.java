@@ -22,9 +22,9 @@ public record WeatherCommonDto (
     }
 
     /** 하위 코드용 엔티티 변환 */
-    public LowerLocationEntity toLowerEntity(UpperLocationEntity upperRef) {
+    public LowerLocationEntity toLowerEntity(UpperLocationEntity upperRef, ApiNameFix nameFix) {
         String lowerWeatherCode = district().substring(2, 5);
-        String fixedLowerCode = ApiNameFix.fixLower(this.lowerCode());
+        String fixedLowerCode = nameFix.fixLower(this.lowerCode());
         return LowerLocationEntity.builder()
                 .lowerCode(fixedLowerCode)
                 .weatherCode(lowerWeatherCode)

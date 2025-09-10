@@ -1,8 +1,5 @@
 package com.projectsugarglider.datainitialize.repository;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,14 +9,18 @@ import org.springframework.stereotype.Repository;
 import com.projectsugarglider.datainitialize.entity.LowerLocationEntity;
 import com.projectsugarglider.datainitialize.entity.id.LowerLocationCodeId;
 import com.projectsugarglider.util.dto.LocationDto;
-import com.projectsugarglider.weather.dto.LowerUpperWeatherDto;
 
 @Repository
 public interface LowerLocationCodeRepository extends JpaRepository<LowerLocationEntity, LowerLocationCodeId> {
 
-    /**
-     * lowerLocationCode + upperCode(복합 키)로 kepcoCode만 업데이트
-     */
+     /**
+      * lowerCode + upperCode(복합 키)로 kepcoCode를 업데이트
+
+      * @param upperCode  기상청 upperCode
+      * @param lowerCode  기상청 lowerCode  
+      * @param kepcoCode  한전 지역코드
+      * @return
+      */
     @Modifying
     @Query("UPDATE LowerLocationEntity l "
          + "SET l.kepcoCode = :kepcoCode "
@@ -31,9 +32,14 @@ public interface LowerLocationCodeRepository extends JpaRepository<LowerLocation
         @Param("kepcoCode") String kepcoCode
     );
 
-        /**
-     * lowerLocationCode + upperCode(복합 키)로 kcaCode만 업데이트
-     */
+    /**
+    * lowerCode + upperCode(복합 키)로 kcaCode를 업데이트
+    * 
+    * @param upperCode  기상청 upperCode
+    * @param lowerCode  기상청 lowerCode  
+    * @param kcaCode    소비자원 지역코드
+    * @return
+    */
     @Modifying
     @Query("UPDATE LowerLocationEntity l "
          + "SET l.kcaCode = :kcaCode "
@@ -45,6 +51,14 @@ public interface LowerLocationCodeRepository extends JpaRepository<LowerLocation
         @Param("kcaCode") String kcaCode
     );
 
+    /**
+     * 기상청 upper/lower 코드로 x/y좌표를 불러옵니다.
+     * 기상청 일기예보 Param으로 사용됩니다.
+     * 
+     * @param upperCode 기상청 upperCode
+     * @param lowerCode 기상청 lowerCode
+     * @return
+     */
     @Query("""
         select new com.projectsugarglider.util.dto.LocationDto(
             l.lowerCode,     
@@ -60,30 +74,5 @@ public interface LowerLocationCodeRepository extends JpaRepository<LowerLocation
         @Param("upperCode") String upperCode,
         @Param("lowerCode") String lowerCode
     );
-
-    @Query("""
-      SELECT new com.projectsugarglider.weather.dto.LowerUpperWeatherDto(
-        l.weatherCode,
-        u.weatherCode
-      )
-      FROM LowerLocationEntity l
-      JOIN l.upperLocationCode u
-    """)
-    List<LowerUpperWeatherDto> findAllLowerUpperWithWeather();
-
-    @Query("""
-      SELECT new com.projectsugarglider.util.dto.LocationDto(
-        l.lowerCode,
-        l.upperCode,
-        l.xGrid,
-        l.yGrid
-      )
-      FROM LowerLocationEntity l
-    """)
-    List<LocationDto> findAllLocationWithWeather();
-
-
-    Optional<LowerLocationEntity> findByUpperCodeAndKcaCode(String upperCode, String kcaCode);
-
 
 }

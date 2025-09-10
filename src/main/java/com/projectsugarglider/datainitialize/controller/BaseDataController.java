@@ -19,6 +19,12 @@ public class BaseDataController {
     private final BaseDataService allLocationDataSaveService;
 
 
+    /**
+     * 한전, 기상청, 소비자원 지역데이터를 업데이트합니다.
+     * 
+     * @return 업데이트 완료 응답
+     * @throws JsonProcessingException
+     */
     @PostMapping("/BasicDataUpdate")
     public ResponseEntity<String> basicDataUpdate() throws JsonProcessingException{
         allLocationDataSaveService.saveAllLocations();

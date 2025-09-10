@@ -31,7 +31,7 @@ public record KepcoUsageDto(
         ApiNameFix nameFix
     ){
         String fixedMetro = nameFix.fixUpper(this.metro);
-        String fixedCity = ApiNameFix.fixLower(this.city);
+        String fixedCity = nameFix.fixLower(this.city);
         return KepcoUsageEntity.builder()
             .year(year)
             .month(month)

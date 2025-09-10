@@ -26,7 +26,14 @@ public class KepcoAPI {
     private final GenericExternalApiService apiService;
 
     /**
-     * 한전(KEPCO) 기본 데이터를 요청합니다.
+     * 한전 지역 데이터를 호출합니다.
+     * DataInitialize에서는 지역데이터를, 
+     * kepco.api에서는 사용량 데이터를 호출합니다.
+     * 
+     * 호출파라미터
+     * codeTy : cityCd
+     * 
+     * @return     한전 지역 데이터
      */
     public List<KepcoCommonDto> baseDataCall() {
 
