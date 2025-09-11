@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.projectsugarglider.datainitialize.repository.LowerLocationCodeRepository;
-import com.projectsugarglider.kca.entity.KcaGoodTotalDivCodeEntity;
 import com.projectsugarglider.kca.repository.TotalDivRepository;
 import com.projectsugarglider.util.dto.TripleList;
 
@@ -54,15 +53,5 @@ public class KcaNullData {
             log.info("update Data = {},{},{}",data.first(), data.second(), data.third());
             repo.updateKcaCodeByKey(data.first(), data.second(), data.third());
         }
-
-        total.save(
-            KcaGoodTotalDivCodeEntity.builder()
-                .code("030102021")
-                .codeName("쪽파")
-                .highCode("030102000")
-                .build()
-        );
-
-
     }
 }
