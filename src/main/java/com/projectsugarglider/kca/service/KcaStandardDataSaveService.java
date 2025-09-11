@@ -13,6 +13,9 @@ import com.projectsugarglider.kca.repository.UnitDivRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 업체정보/단위정보/분류코드 저장용 서비스
+ */
 @Service
 @RequiredArgsConstructor
 public class KcaStandardDataSaveService {

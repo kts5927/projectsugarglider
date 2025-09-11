@@ -9,6 +9,9 @@ import com.projectsugarglider.kca.repository.StoreInfoRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 업체정보 반환용 서비스
+ */
 @Service
 @RequiredArgsConstructor
 public class KcaStoreInfoResponseService {

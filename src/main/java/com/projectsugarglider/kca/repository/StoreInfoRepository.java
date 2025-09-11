@@ -13,7 +13,7 @@ import io.lettuce.core.dynamic.annotation.Param;
 
 public interface  StoreInfoRepository extends JpaRepository<KcaStoreInfoEntity, String> {
     
-        @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("""
         UPDATE KcaStoreInfoEntity s
            SET s.xMapCoord = :xMapCoord,

@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 기본 지역데이터를 한번에 업데이트하는 서비스
+ */
 @Service
 @RequiredArgsConstructor
 public class BaseDataService{

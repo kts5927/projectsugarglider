@@ -11,13 +11,14 @@ import org.springframework.stereotype.Service;
 import com.opencsv.CSVReaderHeaderAware;
 import com.projectsugarglider.datainitialize.dto.WeatherCommonDto;
 
+/**
+ * Weather(기상청) 지역 데이터 조회용 Api 어댑터
+ */
 @Service
 public class WeatherCsvReader {
 
     /**
      * 기상청 지역 데이터를 호출합니다.
-     * DataInitialize에서는 지역데이터를, 
-     * weather.api에서는 일기예보 데이터를 호출합니다.
      * 
      * 데이터는 API호출이 아닌
      * main/resources/기상청데이터.csv의 데이터를 참고합니다.

@@ -13,6 +13,9 @@ import com.projectsugarglider.util.service.DateTime;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 상품 가격정보 조회용 API 어댑터.
+ */
 @Service
 @RequiredArgsConstructor
 public class PriceInfo {
@@ -27,19 +30,42 @@ public class PriceInfo {
     private final GenericExternalApiService apiService;
     private final DateTime dateTime;
 
-
+    /**
+     * 소비자원 상품 가격정보를 업체 아이디만으로 조회합니다.
+     * 상품 아이디 없어도 호출 가능.
+     *
+     * @param entpId 소비자원 업체 아이디
+     * @return       해당 업체의 가격정보 목록
+     */
     public List<KcaPriceInfoDto> priceEntpCall(
         String entpId
     ){
         return priceInfoCall(entpId,null);
     }
 
+    /**
+     * 소비자원 상품 가격정보를 상품 아이디만으로 조회합니다.
+     * 업체 아이디 없어도 호출 가능.
+     *
+     * @param goodId 소비자원 상품 아이디
+     * @return       해당 상품의 가격정보 목록
+     */
     public List<KcaPriceInfoDto> priceGoodCall(
         String goodId
     ){
         return priceInfoCall(null, goodId);
     }
 
+
+/**
+     * 소비자원 상품 가격정보를 조회합니다.
+     * entpId, goodId 중 하나 이상을 넘기면 해당 조건으로 조회됩니다.
+     * (둘 다 null/blank면 호출 의미 없음)
+     *
+     * @param entpId 소비자원 업체 아이디 (선택)
+     * @param goodId 소비자원 상품 아이디 (선택)
+     * @return       가격정보 목록 (엔트리 여러 건 가능)
+     */
     public List<KcaPriceInfoDto> priceInfoCall(
 
         String entpId, 
@@ -65,17 +91,24 @@ public class PriceInfo {
      */
     private Map<String, String> getParams(String entpId, String goodId) {
         boolean hasEntp = entpId != null && !entpId.isBlank();
+        boolean hasGood = goodId != null && !goodId.isBlank();
+    
+        //entpId/goodId 모두 null일때 에러 핸들링
+        if (!hasEntp && !hasGood) {
+            throw new IllegalArgumentException("entpId 또는 goodId 중 하나는 필수입니다.");
+        }
+    
         Map<String, String> params = new LinkedHashMap<>();
-
         params.put("serviceKey", apiKey);
+    
         if (hasEntp) {
             params.put("entpId", entpId);
         } else {
             params.put("goodId", goodId);
         }
-
-        params.put("goodInspectDay",dateTime.previousTwoWeekFridayYyyyMmDd());
-
+    
+        params.put("goodInspectDay", dateTime.previousTwoWeekFridayYyyyMmDd());
+    
         return params;
     }
 

@@ -3,7 +3,6 @@ package com.projectsugarglider.front.db;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -23,8 +22,6 @@ public class WeatherCallPartitionManager{
     private final DateTime dateTime;
     private final JdbcTemplate jdbcTemplate;
     private static final DateTimeFormatter BASIC = DateTimeFormatter.BASIC_ISO_DATE;
-    private static final Pattern PARTITION_NAME = Pattern.compile("^weather_call_history_(\\d{8})$");
-
 
 
     @EventListener(ApplicationReadyEvent.class)
@@ -34,6 +31,11 @@ public class WeatherCallPartitionManager{
     }
 
 
+    /**
+     * 파티션을 만듭니다.
+     * 오늘 날짜의 파티션이 없다면 만들고, 
+     * 있다면 만들지 않습니다.
+     */
     private void createPartitions(){
 
         String ymd = dateTime.kstNowYYYYMMDD();

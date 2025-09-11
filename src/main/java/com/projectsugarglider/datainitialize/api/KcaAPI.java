@@ -11,6 +11,9 @@ import com.projectsugarglider.datainitialize.dto.KcaCommonDto;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 지역 데이터 조회용 Api 어댑터
+ */
 @Service
 @RequiredArgsConstructor
 public class KcaAPI {
@@ -25,11 +28,6 @@ public class KcaAPI {
 
     /**
      * 소비자원 지역 데이터를 호출합니다.
-     * DataInitialize에서는 지역데이터를, 
-     * kca.api에서는 상품종류, 판매처 등의 데이터를 호출합니다.
-     * 
-     * 호출파라미터
-     * classCode : AR
      * 
      * @return     소비자원 지역 데이터
      */

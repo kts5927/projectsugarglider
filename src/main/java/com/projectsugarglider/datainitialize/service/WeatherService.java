@@ -18,6 +18,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Weather(기상청) 지역 데이터 저장용 서비스
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,19 +32,8 @@ public class WeatherService {
     private final LowerLocationCodeRepository lowerRepo;
 
     /**
-     * 기상청 데이터를 업데이트 합니다.
-     * 기상청 지역데이터는 csv데이터 기반이라 정렬되어 있습니다.
-     * 데이터는 행정코드/상위지역명/하위지역명/x좌표/y좌표가 묶여져 있습니다.
-     * 따라서 하나의 상위지역 데이터가 모두 나왔을때 다음 데이터가 나옵니다.
-     * (예시/ 서울특별시 데이터... 대전광역시 데이터...)
-     * 
-     * 중복탐색을 방지하기 위해 upperBefore String값을 사용하여
-     * 상위지역코드가 다 끝났을때(upperBefore != currentWeatherCode)
-     * 상위코드를 새로운 지역코드로 갱신하게 됩니다.
-     * 
-     * 또한 데이터의 Batch처리를 위해
-     * ArrayList에 데이터를 저장한 후, 
-     * 로직이 끝났을때 한꺼번에 DB로 저장합니다.
+     * 정렬된 기상청 기준데이터를 상/하위 지역 엔티티로 만들어 일괄 저장.
+     * - data는 행정코드 앞 2자리(상위코드) 기준으로 정렬되어 있음.
      */
     @Transactional
     public void updateBaseWeatherData() {
@@ -52,18 +44,15 @@ public class WeatherService {
         String upperBefore = "00";
         UpperLocationEntity upperRef = null;
 
-        //불러온 데이터
         for (WeatherCommonDto row : data) {
             String 행정코드 = row.district();
             String currentWeatherCode = 행정코드.substring(0, 2);
 
-            // 상위지역이 다르다면(새로운 상위지역이 나왔다면) 저장할 상위 지역에 추가
             if (!upperBefore.equals(currentWeatherCode)) {
                 upperBefore = currentWeatherCode;
                 upperRef = row.toUpperEntity();
                 uppers.add(upperRef);
             }
-            //저장할 하위 지역에 추가
             lowers.add(row.toLowerEntity(upperRef,nameFix));
         }
         upperRepo.saveAll(uppers);

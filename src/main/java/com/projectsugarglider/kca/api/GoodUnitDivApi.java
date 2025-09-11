@@ -11,6 +11,9 @@ import com.projectsugarglider.kca.dto.KcaStandardInfoDto;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 상품 단위정보 조회용 API 어댑터.
+ */
 @Service
 @RequiredArgsConstructor
 public class GoodUnitDivApi {
@@ -24,6 +27,11 @@ public class GoodUnitDivApi {
 
     private final GenericExternalApiService apiService;
 
+    /**
+     * 소비자원 상품 단위구분 데이터를 호출합니다.
+     * 
+     * @return 소비자원 상품 단위구분 데이터
+     */
     public List<KcaStandardInfoDto> unitDivCall(){
 
         return apiService.getCall(

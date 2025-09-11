@@ -12,6 +12,9 @@ import com.projectsugarglider.kca.repository.KcaPriceInfoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 상품 가격정보 데이터 저장용 서비스.
+ */
 @Service
 @RequiredArgsConstructor
 public class KcaPriceService {
@@ -19,7 +22,11 @@ public class KcaPriceService {
     private final PriceInfo priceInfo;
     private final KcaPriceInfoRepository priceRepo;
 
-
+    /**
+     * 소비자원 상품 가격정보 데이터를 저장합니다.
+     * 
+     * @param entp  소비자원 업체 코드(entpId)
+     */
     @Transactional
     public void SavePriceInfoData(String entp){
 

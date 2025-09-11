@@ -10,7 +10,9 @@ import com.projectsugarglider.datainitialize.service.BaseDataService;
 
 import lombok.RequiredArgsConstructor;
 
-
+/**
+ * DataInitialize용 컨트롤러
+ */
 @RestController
 @RequestMapping("/DataInitialize")
 @RequiredArgsConstructor

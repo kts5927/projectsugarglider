@@ -11,6 +11,9 @@ import com.projectsugarglider.kca.dto.KcaStandardInfoDto;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KCA(소비자원) 업체 타입데이터 조회용 API 어댑터.
+ */
 @Service
 @RequiredArgsConstructor
 public class EntptypeDivApi {
@@ -18,12 +21,16 @@ public class EntptypeDivApi {
     @Value("${external.publicapi.apiKey}")
     private String apiKey;
 
-        
     @Value("${external.kca.totaldiv}")
     private String BASE_URL;
 
     private final GenericExternalApiService apiService;
 
+    /**
+     * 소비자원 업체 타입데이터를 호출합니다.
+     * 
+     * @return 소비자원 업체 타입데이터
+     */
     public List<KcaStandardInfoDto> entpTypeCall(){
 
         return apiService.getCall(

@@ -13,6 +13,9 @@ import com.projectsugarglider.datainitialize.dto.KepcoCommonDto;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * KEPCO(한전) 지역 데이터 조회용 Api 어댑터
+ */
 @Service
 @RequiredArgsConstructor
 public class KepcoAPI {
@@ -27,11 +30,6 @@ public class KepcoAPI {
 
     /**
      * 한전 지역 데이터를 호출합니다.
-     * DataInitialize에서는 지역데이터를, 
-     * kepco.api에서는 사용량 데이터를 호출합니다.
-     * 
-     * 호출파라미터
-     * codeTy : cityCd
      * 
      * @return     한전 지역 데이터
      */

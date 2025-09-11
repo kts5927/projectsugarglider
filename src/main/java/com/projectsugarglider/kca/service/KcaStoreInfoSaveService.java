@@ -27,6 +27,9 @@ public class KcaStoreInfoSaveService {
     private final UpperLocationCodeRepository upperRepository;
     private final LowerLocationCodeRepository lowerRepository;
 
+    /**
+     * 소비자원 업체 기본 정보를 저장합니다.
+     */
     @Transactional
     public void saveStoreInfoData() {
 
@@ -39,7 +42,10 @@ public class KcaStoreInfoSaveService {
             storeInfoRepository.saveAll(entities);
         }
     }
-
+    
+    /**
+     * 소비자원 업체정보를 불러옵니다.
+     */
     private List<KcaStoreInfoEntity> getEntities(
         List<KcaStoreInfoDto> raw, 
         Map<String, String> upperKeyByKca,
@@ -68,7 +74,10 @@ public class KcaStoreInfoSaveService {
             .toList();
         return entities;
     }
-
+    /**
+     * 하위 지역코드를 불러옵니다. 
+     * - 출력: "상위지역코드" + "|"" + "하위지역코드" 데이터를 반환
+     */
     private Map<String, String> getLowerCode() {
         Map<String, String> lowerCodeByPair = lowerRepository.findAll().stream()
             .filter(l -> l.getKcaCode() != null && l.getUpperCode() != null && l.getLowerCode() != null)
@@ -80,6 +89,9 @@ public class KcaStoreInfoSaveService {
         return lowerCodeByPair;
     }
 
+    /**
+     * 상위 지역코드를 불러옵니다.
+     */
     private Map<String, String> getUpperKey() {
         Map<String, String> upperKeyByKca = upperRepository.findAll().stream()
             .filter(u -> u.getKcaCode() != null && u.getUpperCode() != null)

@@ -17,6 +17,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * KCA(소비자원) 상품 기본정보 데이터 저장용 서비스
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -27,6 +30,11 @@ public class KcaProductInfoService {
     private final TotalDivRepository totalRepo;
     private final ProductInfoRepository priceRepo;
 
+    /**
+     * 소비자원 상품 기본정보 데이터를 저장합니다.
+     * 
+     * 데이터가 업데이트 될 수 있음.(주기적이지 않음)
+     */
     @Transactional
     public void SaveProductInfoData(){
 

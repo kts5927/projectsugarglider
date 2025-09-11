@@ -5,21 +5,23 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.projectsugarglider.datainitialize.repository.LowerLocationCodeRepository;
-import com.projectsugarglider.kca.repository.TotalDivRepository;
 import com.projectsugarglider.util.dto.TripleList;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * KCA(소비자원) 지역 데이터 업데이트용 서비스.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class KcaNullData {
+public class KcaLocationData {
 
     private final LowerLocationCodeRepository repo;
-    private final TotalDivRepository total;
     
+    //TODO : 하드코딩이 아닌 지역데이터 저장할때 변환로직으로 바꾸기
     List<TripleList> codes = List.of(
         new TripleList("경기도",   "고양시일산동", "08000"),
         new TripleList("경기도",   "고양시일산서", "08000"),
@@ -42,11 +44,10 @@ public class KcaNullData {
         new TripleList("인천광역시", "미추홀",  "08000")
 
     );
-    
 
-
-    
-
+    /**
+     * 소비자원 지역 데이터중 지역명이 다른 데이터를 보충합니다.
+     */
     @Transactional
     public void insertData(){
         for(TripleList data : codes){
